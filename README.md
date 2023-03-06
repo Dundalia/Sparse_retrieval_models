@@ -27,7 +27,7 @@ $$BM25 \ Lucene$$ | $$\sum_{t\in q} \log \left ( \frac{N - df_t + 0.5}{df_t + 0.
 $$BM25 \ ATIRE$$ | $$\sum_{t\in q} \log \left ( \frac{N}{df_t} \right ) \cdot \frac{tf_{td} \cdot (1+k_1)} {tf_{td} + k_1 \cdot (1-b+b\cdot \frac{L_d}{L_{avg}})}$$
 $$BM25L$$| $$\sum_{t\in q} \log \left ( \frac{N+1}{df_t+0.5}\right ) \cdot \frac{(k_1 +1)\cdot (c_{td}+\delta)} {k_1 + c_{td} + \delta}$$
 $$BM25+$$ | $$\sum_{t\in q} \log \left ( \frac{N+1}{df_t}\right ) \cdot \left( \frac{(k_1 +1)\cdot tf_{td}} {k_1 \cdot (1-b+b \cdot \frac{L_d}{L_{avg}}) + tf_{td}} + \delta \right )$$
-$$BM25\ Adtp$$ | $$\sum_{t\in q} G_q^1 \cdot \frac{(k_1^* +1) \cdot tf_{td}}{k_1^* \cdot (1-b+b\cdot(\frac{L_d}{L_{avg}})) + tf_{td}}$$
+$$BM25\ Adpt$$ | $$\sum_{t\in q} G_q^1 \cdot \frac{(k_1^* +1) \cdot tf_{td}}{k_1^* \cdot (1-b+b\cdot(\frac{L_d}{L_{avg}})) + tf_{td}}$$
 $$TF_{l\circ\delta\circ p}\times IDF$$ | $$\sum_{t\in q} \log \left ( \frac{N+1}{df_t}\right ) \cdot  \left( 1+\log\left(1+\log\left(\frac{tf_{td}}{1-b+b\cdot \frac{L_d}{L_{avg}}} + \delta\right)\right)\right )$$
 
 The implementation is an extension and adaptation of the [rank-bm25](https://github.com/dorianbrown/rank_bm25) library.
@@ -206,7 +206,7 @@ The final formula is:
 
 $$\sum_{t\in q} \log \left ( \frac{N+1}{df_t}\right ) \cdot \left( \frac{(k_1 +1)\cdot tf_{td}} {k_1 \cdot (1-b+b \cdot \frac{L_d}{L_{avg}}) + tf_{td}} + \delta \right )$$
 
-### $BM25Adtp$
+### $BM25Adpt$
 
 $BM25Adpt$ [[8](#ref)] is an approach that adapts $k_1$ for each term. To do so it starts by identifying the probability of a term occurring at least once in a document as $(df_{tr} + 0.5)/(N+1)$. The probability of the term occurring one more time is then deﬁned as $(df_{r+1} +0.5)/(df_r+ 1)$. The information gain of a term occurring $r + 1$ instead of $r$ times is deﬁned as 
 
