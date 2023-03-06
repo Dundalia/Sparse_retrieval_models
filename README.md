@@ -65,8 +65,29 @@ And similar methods:
 * `model.get_batch_scores(query, documents_ids)` = returns the scores for a subset of the corpus, indexed by documents_ids
 * `model.get_top_n(query, n, documents)` = return the n documents with the highest scores
 
+## Suggested tokenizer
 
-### Explanation of the models
+We propose a simple tokenizer to preprocess docs and queries in a few steps, exploiting the *nltk* library:
+
+1. Punctuation removal 
+2. Lowercase words
+3. Stopword removal
+4. Stemming with Porter stemmer 
+
+For example: 
+
+* INPUT STRING:      !hi. Wh?at is the weat[h]er lik?Ely to be??
+
+* STEP 1:            hi What is the weather likEly to be
+* STEP 2:            ['hi', 'what', 'is', 'the', 'weather', 'likely', 'to', 'be']
+* STEP 3:            ['hi', 'weather', 'likely']
+* STEP 4:            ['hi', 'weather', 'like']
+
+* TOKENIZED STRING:  ['hi', 'weather', 'like']
+
+
+
+## Explanation of the models
 
 #### $TFIDF$
 
