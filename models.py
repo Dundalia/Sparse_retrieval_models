@@ -3,6 +3,44 @@ import numpy as np
 from multiprocessing import Pool, cpu_count
 from time import time
 import warnings
+import nltk
+from nltk import PorterStemmer
+from nltk.corpus import stopwords
+import string
+
+
+#################################
+########### Tokenizer ###########
+#################################
+
+
+# Downloading and importing English stopwords
+nltk.download("stopwords")
+stop_words = stopwords.words("english")
+
+# As we first remove punnctuation, 
+# to remove it even from stopwords
+stop_words = [sw.translate(str.maketrans("", "", string.punctuation)) for sw in stop_words]
+
+# Initializing porter stemmer
+ps = PorterStemmer()
+
+def tokenizer(doc):
+  # remove punctuation
+  processed_doc = doc.translate(str.maketrans("", "", string.punctuation))
+
+  # lowercase and tokenize the doc
+  processed_doc = processed_doc.lower().split()
+  
+  # removing stopwords
+  processed_doc = [w for w in processed_doc if not w in stop_words]
+
+  # applying porter stemmer
+  processed_doc = [ps.stem(w) for w in processed_doc]
+
+  return processed_doc
+
+
 
 #################################
 ############# TFIDF #############
